@@ -29,11 +29,6 @@ $("#addTrainBtn").on("click", function(event){
 
   database.ref().push(newTrain);
 
-  console.log(newTrain.name);
-  console.log(newTrain.destination);
-  console.log(newTrain.time);
-  console.log(newTrain.frequency);
-
   $("#train-input").val("");
   $("#destination-input").val("");
   $("#time-input").val("");
@@ -42,20 +37,12 @@ $("#addTrainBtn").on("click", function(event){
 
 database.ref().on("child_added", function(childSnapshot, prevChildKey){
 
-  console.log(childSnapshot.val());
-
   var trainName = childSnapshot.val().name;
   var destination = childSnapshot.val().destination;
   var trainTime = childSnapshot.val().time;
   var freq = childSnapshot.val().frequency;
 
-  console.log(trainName);
-  console.log(destination);
-  console.log(trainTime);
-  console.log(freq);
-
   var trainTimeClean = moment(trainTime, "HH:mm");
-  console.log(trainTimeClean);
 
   var timeDiff = moment().diff(moment(trainTimeClean), "minutes");
 
@@ -63,8 +50,7 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey){
 
   var minRemain = freq - timeRemain;
 
-  var nextArriv = moment().add(minRemain, "minutes").format("HH:mm");
-  console.log(nextArriv);
+  var nextArriv = moment().add(minRemain, "minutes").format("hh:mm a");
 
   $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + freq + "</td><td>" + nextArriv + "</td><td>" + minRemain + "</td></tr>");
 });

@@ -1,4 +1,13 @@
+body {
+	background-image: url(../images/swirl_pattern.png);
+}
+
 .jumbotron {
-background-color: sienna; 
+background-color: #006dcc; 
 color: white;
+text-align: center;
+}
+
+thead {
+	font-weight: bold;
 };
